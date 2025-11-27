@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectDev | Minimalist Engineering</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"BR Sonoma"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#000000',
+                            charcoal: '#0a0a0a',
+                            gray: '#888888',
+                            white: '#ffffff'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Import Font */
+        @import url('https://fonts.cdnfonts.com/css/br-sonoma');
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-feature-settings: "ss01", "ss02"; /* Modern font features */
+        }
+
+        /* Subtle Grid Background */
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Spotlight Effect */
+        .spotlight {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0,0,0,0) 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            top: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(60px);
+        }
+
+        /* Glassmorphism Card (Monochrome) */
+        .glass-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient Text (White to Gray) */
+        .text-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Navbar Blur */
+        nav {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* Button Glow */
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Elements -->
+    <div class="grid-bg"></div>
+    <div class="spotlight"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity">
+                    <!-- ProjectDev Logo -->
+                    <img class="h-9 w-auto" src="https://litestream-iptv.vercel.app/assets/project_dev_logo_(white).svg" alt="ProjectDev Logo">
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-400 hover:text-white transition-colors px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#services" class="text-gray-400 hover:text-white transition-colors px-3 py-2 text-sm font-medium">Services</a>
+                        <a href="#contact" class="bg-white text-black border border-white px-5 py-2 rounded-full text-sm font-bold hover:bg-transparent hover:text-white transition-all duration-300">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-24 lg:pt-52 lg:pb-40 overflow-hidden flex flex-col items-center justify-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            
+            <div data-aos="fade-down" class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-white/20 bg-white/5 text-gray-300 text-xs font-medium uppercase tracking-widest backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                System Operational
+            </div>
+
+            <h1 data-aos="fade-up" data-aos-delay="100" class="text-6xl md:text-8xl font-bold tracking-tighter mb-6 leading-tight">
+                Build. Stream. <br />
+                <span class="text-gradient">Dominate.</span>
+            </h1>
+
+            <p data-aos="fade-up" data-aos-delay="200" class="mt-6 max-w-2xl mx-auto text-xl text-gray-400 font-light">
+                High-performance utilities and streaming platforms engineered for the modern web. Pure performance, zero clutter.
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="300" class="mt-12 flex flex-col sm:flex-row justify-center gap-5">
+                <a href="#services" class="btn-glow group relative px-8 py-4 bg-white text-black font-bold rounded-lg overflow-hidden transition-all border border-white">
+                    <span class="relative z-10">Our Products</span>
+                </a>
+                <a href="https://github.com/projectdevphil" target="_blank" class="px-8 py-4 bg-black border border-white/20 hover:border-white text-white rounded-lg transition-colors flex items-center justify-center gap-3 font-medium">
+                    <i class="fa-brands fa-github text-xl"></i> 
+                    <span>Open GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 data-aos="fade-up" class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white">The Suite</h2>
+                <div class="h-1 w-20 bg-white mx-auto rounded-full opacity-20"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Service 1: Stream Tester -->
+                <div data-aos="fade-up" data-aos-delay="100" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full">
+                    <div class="h-16 mb-8 flex items-center justify-start opacity-90 group-hover:opacity-100 transition-opacity">
+                        <img src="https://raw.githubusercontent.com/projectdevphil/stream-tester/refs/heads/gh-pages/assets/stream_tester_logo.svg" 
+                             alt="Stream Tester Logo" 
+                             class="h-full w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-white">Stream Tester</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed flex-grow">
+                        Precision diagnostics for HLS and DASH streams. A developer-first utility to validate protocols and ensure playback stability across all devices.
+                    </p>
+                    
+                    <div class="mt-auto pt-6 border-t border-white/10">
+                        <a href="https://projectdevphil.github.io/stream-tester/" target="_blank" class="inline-flex items-center text-white font-semibold hover:text-gray-300 transition-colors">
+                            Launch Console <i class="fa-solid fa-arrow-right ml-3 text-xs transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2: Litestream -->
+                <div data-aos="fade-up" data-aos-delay="200" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full">
+                    <div class="h-16 mb-8 flex items-center justify-start opacity-90 group-hover:opacity-100 transition-opacity">
+                        <!-- Used brightness/contrast to ensure it looks good in monochrome -->
+                        <img src="https://litestream-iptv.vercel.app/assets/litestream_logo_(light).png" 
+                             alt="Litestream Logo" 
+                             class="h-full w-auto object-contain brightness-200 contrast-100">
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-white">Litestream</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed flex-grow">
+                        A seamless IPTV interface built on speed. We've stripped away the bloat to provide a cinematic, responsive, and elegant viewing experience.
+                    </p>
+                    
+                    <div class="mt-auto pt-6 border-t border-white/10">
+                        <a href="https://litestream-iptv.vercel.app/" target="_blank" class="inline-flex items-center text-white font-semibold hover:text-gray-300 transition-colors">
+                            Enter Platform <i class="fa-solid fa-arrow-right ml-3 text-xs transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimalist Stats / Trust -->
+    <section class="py-16 border-y border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-left">
+                <p class="text-xl font-light text-white">Engineered for <span class="font-bold border-b border-white">reliability</span>.</p>
+            </div>
+            <div class="flex gap-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+               <!-- Tech Stack Icons - Pure White -->
+               <i class="fab fa-react text-3xl"></i>
+               <i class="fab fa-js text-3xl"></i>
+               <i class="fab fa-html5 text-3xl"></i>
+               <i class="fab fa-css3 text-3xl"></i>
+               <i class="fab fa-github text-3xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                
+                <!-- Brand -->
+                <div>
+                    <img class="h-8 w-auto mb-6" src="https://litestream-iptv.vercel.app/assets/project_dev_logo_(white).svg" alt="ProjectDev Logo">
+                    <p class="text-gray-500 text-sm leading-6">
+                        Building the backbone of modern streaming. <br>Minimalist tools for maximum impact.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div class="flex flex-col space-y-4">
+                    <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-2">Platform</h4>
+                    <a href="#home" class="text-gray-500 hover:text-white transition-colors text-sm">Home</a>
+                    <a href="#services" class="text-gray-500 hover:text-white transition-colors text-sm">Services</a>
+                    <a href="https://github.com/projectdevphil" class="text-gray-500 hover:text-white transition-colors text-sm">GitHub</a>
+                </div>
+
+                <!-- Connect -->
+                <div class="flex flex-col space-y-4">
+                    <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-2">Connect</h4>
+                    <div class="flex space-x-5">
+                        <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://github.com/projectdevphil" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white transition-all">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-xs">&copy; 2024 ProjectDev. All rights reserved.</p>
+                <p class="text-gray-700 text-xs mt-2 md:mt-0 font-mono">EST. 2024</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)' 
+        });
+    </script>
+</body>
+</html>
