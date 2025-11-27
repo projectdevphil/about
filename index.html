@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth overflow-x-hidden">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +30,8 @@
                             white: '#ffffff'
                         }
                     },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -42,85 +42,87 @@
         /* Import Font */
         @import url('https://fonts.cdnfonts.com/css/br-sonoma');
 
+        /* CRITICAL: Global Overflow Fix */
         html, body {
-            overflow-x: hidden; /* CRITICAL FIX: Forces no side scrolling */
-            width: 100%;
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Hides horizontal scrollbar */
+            width: 100%;
             background-color: #000000;
             color: #ffffff;
             font-feature-settings: "ss01", "ss02";
         }
 
-        /* Subtle Grid Background */
+        /* 1. RESTORED GRID BACKGROUND */
         .grid-bg {
             position: absolute;
             inset: 0;
-            background-size: 40px 40px;
+            background-size: 50px 50px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
             z-index: -2;
             pointer-events: none;
+            height: 100vh;
             width: 100%;
         }
 
-        /* Spotlight Effect - FIXED FOR MOBILE */
+        /* Spotlight Effect */
         .spotlight {
             position: absolute;
-            width: 100%; /* Changed from fixed 800px to responsive */
+            width: 100%;
             max-width: 800px;
-            height: 600px; /* Reduced height slightly for mobile */
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0,0,0,0) 60%);
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(0,0,0,0) 60%);
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
             top: -200px;
             left: 50%;
             transform: translateX(-50%);
-            filter: blur(60px);
+            filter: blur(80px);
         }
 
         /* Glassmorphism Card (Monochrome) */
         .glass-card {
-            background: rgba(10, 10, 10, 0.6);
+            background: rgba(10, 10, 10, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .glass-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.01);
             background: rgba(20, 20, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: 0 20px 40px -15px rgba(255, 255, 255, 0.1);
         }
 
         /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #777777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         /* Navbar Blur */
         nav {
-            backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.7);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         /* Button Glow */
         .btn-glow:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
-<body class="antialiased w-full overflow-x-hidden">
+<body class="antialiased">
 
-    <!-- Wrapper to strictly catch overflow -->
+    <!-- Wrapper ensures no overflow happens when animations fly in -->
     <div class="relative w-full overflow-hidden">
 
         <!-- Background Elements -->
@@ -135,11 +137,9 @@
                         <!-- ProjectDev Logo -->
                         <img class="h-9 w-auto" src="https://litestream-iptv.vercel.app/assets/project_dev_logo_(white).svg" alt="ProjectDev Logo">
                     </div>
-                    <!-- Mobile Menu Button -->
-                    <div class="md:hidden">
-                        <button class="text-white hover:text-gray-300 focus:outline-none">
-                            <i class="fa-solid fa-bars text-xl"></i>
-                        </button>
+                    <!-- Mobile Menu Icon (Visual Only) -->
+                    <div class="md:hidden text-white text-xl">
+                        <i class="fa-solid fa-bars"></i>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-8">
@@ -153,11 +153,11 @@
         </nav>
 
         <!-- Hero Section -->
-        <section id="home" class="relative pt-32 pb-24 lg:pt-52 lg:pb-40 flex flex-col items-center justify-center">
+        <section id="home" class="relative pt-32 pb-24 lg:pt-52 lg:pb-40 flex flex-col items-center justify-center min-h-[80vh]">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 w-full">
                 
                 <div data-aos="fade-down" class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-white/20 bg-white/5 text-gray-300 text-xs font-medium uppercase tracking-widest backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse-slow"></span>
                     System Operational
                 </div>
 
@@ -183,18 +183,19 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-24 relative border-t border-white/5">
+        <section id="services" class="py-24 relative border-t border-white/5 bg-black/50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-20">
                     <h2 data-aos="fade-up" class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white">The Suite</h2>
                     <div class="h-1 w-20 bg-white mx-auto rounded-full opacity-20"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 overflow-hidden p-2">
                     
-                    <!-- Service 1: Stream Tester -->
-                    <!-- Changed animation to fade-up to prevent side-scrolling issues -->
-                    <div data-aos="fade-up" data-aos-delay="100" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full">
+                    <!-- 2. RESTORED SIDE ANIMATIONS -->
+                    
+                    <!-- Service 1: Stream Tester (Comes from Left) -->
+                    <div data-aos="fade-right" data-aos-delay="100" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full relative">
                         <div class="h-16 mb-8 flex items-center justify-start opacity-90 group-hover:opacity-100 transition-opacity">
                             <img src="https://raw.githubusercontent.com/projectdevphil/stream-tester/refs/heads/gh-pages/assets/stream_tester_logo.svg" 
                                  alt="Stream Tester Logo" 
@@ -213,8 +214,8 @@
                         </div>
                     </div>
 
-                    <!-- Service 2: Litestream -->
-                    <div data-aos="fade-up" data-aos-delay="200" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full">
+                    <!-- Service 2: Litestream (Comes from Right) -->
+                    <div data-aos="fade-left" data-aos-delay="200" class="glass-card rounded-xl p-8 md:p-12 group flex flex-col h-full relative">
                         <div class="h-16 mb-8 flex items-center justify-start opacity-90 group-hover:opacity-100 transition-opacity">
                             <img src="https://litestream-iptv.vercel.app/assets/litestream_logo_(light).png" 
                                  alt="Litestream Logo" 
@@ -254,7 +255,7 @@
         </section>
 
         <!-- Footer -->
-        <footer id="contact" class="bg-black pt-20 pb-10">
+        <footer id="contact" class="bg-black pt-20 pb-10 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                     
@@ -295,7 +296,7 @@
             </div>
         </footer>
 
-    </div> <!-- End Overflow Wrapper -->
+    </div> <!-- End Wrapper -->
 
     <!-- Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -304,7 +305,7 @@
             duration: 1000,
             once: true,
             easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-            disable: 'mobile' // Optional: disables animations on phone if performance is an issue
+            mirror: false
         });
     </script>
 </body>
