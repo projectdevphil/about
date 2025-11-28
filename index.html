@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProjectDev | Next-Gen Streaming Infrastructure</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -48,6 +48,29 @@
         @import url('https://fonts.cdnfonts.com/css/br-sonoma');
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+        
+        a img {
+            pointer-events: none;
+        }
+
         html, body {
             margin: 0;
             padding: 0;
@@ -57,6 +80,7 @@
             color: #ffffff;
             font-feature-settings: "ss01", "ss02", "salt";
             -webkit-font-smoothing: antialiased;
+            touch-action: pan-x pan-y;
         }
 
         ::-webkit-scrollbar {
@@ -159,7 +183,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" oncontextmenu="return false;">
 
     <div class="grid-bg"></div>
     <div class="relative w-full overflow-hidden">
@@ -169,7 +193,7 @@
         <nav class="fixed w-full z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
-                    <div class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity">
+                    <div onclick="window.location.reload()" class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity" title="Refresh Page">
                         <img class="h-8 w-auto" src="https://litestream-iptv.vercel.app/assets/project_dev_logo_(white).svg" alt="ProjectDev Logo">
                     </div>
                     
@@ -473,6 +497,11 @@
                 });
                 document.body.style.overflow = '';
             }
+        });
+
+        // MODIFIED: Added specific script to ensure right-click is disabled even if inline HTML attribute fails
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
     </script>
 </body>
