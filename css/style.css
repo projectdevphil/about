@@ -5,79 +5,36 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
-img {
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
-    pointer-events: none;
-}
-
-a img {
-    pointer-events: none;
-}
+img { pointer-events: none; }
 
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    width: 100%;
-    background-color: #000000;
-    color: #ffffff;
+    margin: 0; padding: 0; overflow-x: hidden; width: 100%;
+    background-color: #000000; color: #ffffff;
     font-family: 'Onest', sans-serif;
-    font-feature-settings: "ss01", "ss02", "salt";
-    -webkit-font-smoothing: antialiased;
-    touch-action: pan-x pan-y;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #000;
-}
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
 .grid-bg {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-size: 50px 50px;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                       linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    z-index: -1;
-    pointer-events: none;
-    height: 100vh;
-    width: 100%;
+    z-index: -1; pointer-events: none; height: 100vh;
 }
 
 .spotlight {
-    position: absolute;
-    width: 100%;
-    max-width: 1000px;
-    height: 600px;
+    position: absolute; width: 100%; max-width: 1000px; height: 600px;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0,0,0,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -2;
-    top: -250px;
-    left: 50%;
-    transform: translateX(-50%);
-    filter: blur(80px);
+    border-radius: 50%; pointer-events: none; z-index: -2;
+    top: -250px; left: 50%; transform: translateX(-50%); filter: blur(80px);
 }
 
 .glass-card {
@@ -86,7 +43,6 @@ html, body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.4s ease;
 }
-
 .glass-card:hover {
     border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-4px);
@@ -95,34 +51,16 @@ html, body {
 
 .modal {
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0; visibility: hidden;
 }
-.modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-.modal-content {
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-.modal.active .modal-content {
-    transform: scale(1);
-}
+.modal.active { opacity: 1; visibility: visible; }
+.modal-content { transform: scale(0.95); transition: transform 0.3s ease; }
+.modal.active .modal-content { transform: scale(1); }
 
-nav {
-    backdrop-filter: blur(20px);
-    background: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-#mobile-menu {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-}
 .menu-open {
-    transform: translateY(0) !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 .menu-closed {
     transform: translateY(-20px);
@@ -134,65 +72,4 @@ nav {
     background: linear-gradient(180deg, #ffffff 0%, #999999 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-/* ... Previous CSS ... */
-
-/* Chat Bubbles */
-.message-bubble {
-    max-width: 80%;
-    margin-bottom: 12px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    position: relative;
-    word-wrap: break-word;
-}
-
-.message-mine {
-    background: #ffffff;
-    color: #000000;
-    margin-left: auto;
-    border-bottom-right-radius: 2px;
-}
-
-.message-other {
-    background: #1a1a1a;
-    color: #e5e5e5;
-    margin-right: auto;
-    border: 1px solid #333;
-    border-bottom-left-radius: 2px;
-}
-
-.message-meta {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.65rem;
-    margin-bottom: 4px;
-    opacity: 0.7;
-    display: block;
-}
-
-.message-mine .message-meta {
-    color: #666;
-    text-align: right;
-}
-
-.message-other .message-meta {
-    color: #22c55e; /* Green for user name */
-}
-
-.fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Ensure Chat Box scrolls properly */
-#chat-box {
-    scroll-behavior: smooth;
-    padding-bottom: 20px;
 }
