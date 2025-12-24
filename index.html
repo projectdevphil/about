@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Project Dev | Next-Gen Streaming Infrastructure</title>
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">    
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -55,14 +53,6 @@
                             <a href="#features" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Features</a>
                             <a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Products</a>
                             <a href="https://github.com/projectdevphil" target="_blank" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
-                            <!-- UPDATED COMMUNITY TAB -->
-                            <button onclick="openModal('community-modal')" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
-                                <span class="relative flex h-2 w-2">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                Community
-                            </button>
                             <a href="#contact" class="bg-white text-black border border-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-transparent hover:text-white transition-all duration-300">Get Started</a>
                         </div>
                     </div>
@@ -75,13 +65,11 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 menu-closed md:hidden flex flex-col items-center py-8 space-y-6 z-40 h-screen">
                 <a href="#home" class="text-xl text-white font-medium" onclick="toggleMenu()">Overview</a>
                 <a href="#features" class="text-xl text-white font-medium" onclick="toggleMenu()">Features</a>
                 <a href="#services" class="text-xl text-white font-medium" onclick="toggleMenu()">Products</a>
                 <a href="https://github.com/projectdevphil" class="text-xl text-white font-medium" onclick="toggleMenu()">GitHub</a>
-                <button onclick="toggleMenu(); openModal('community-modal')" class="text-xl text-green-400 font-medium">Community Chat</button>
                 <div class="w-20 h-[1px] bg-white/20 my-4"></div>
                 <a href="#contact" class="px-8 py-3 bg-white text-black rounded-full font-bold" onclick="toggleMenu()">Contact Us</a>
             </div>
@@ -116,7 +104,6 @@
             </div>
         </section>
 
-        <!-- PARTNERS SLIDE -->
         <div class="w-full border-y border-white/5 bg-black py-6 overflow-hidden relative">
             <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10"></div>
             <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10"></div>
@@ -128,7 +115,6 @@
                 <span class="text-xl font-bold font-mono">GOOGLE AI</span>
                 <span class="text-xl font-bold font-mono">GITHUB</span>
                 <span class="text-xl font-bold font-mono">SHAKA PLAYER</span>
-                <!-- Duplicates for loop -->
                 <span class="text-xl font-bold font-mono">NETFLIX</span>
                 <span class="text-xl font-bold font-mono">FAST.COM</span>
                 <span class="text-xl font-bold font-mono">VERCEL</span>
@@ -183,14 +169,10 @@
                 </div>
         
                 <div class="space-y-24">
-                    <!-- PRODUCT 1: STREAM TESTER -->
                     <div class="flex flex-col lg:flex-row gap-12 items-center">
-                        <!-- Logo Container -->
                         <div data-aos="fade-right" class="w-full lg:w-1/2 glass-card p-12 rounded-2xl relative overflow-hidden group flex items-center justify-center min-h-[300px]">
-                            <!-- Background Glow Effect -->
                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 blur-[60px] rounded-full group-hover:bg-white/10 transition-colors duration-500"></div>
                             
-                            <!-- TEXT LOGO: Lowercase, Onest Font -->
                             <div class="relative z-10 transition-transform duration-500 group-hover:scale-105">
                                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter font-sans lowercase text-white">
                                     stream tester
@@ -198,7 +180,6 @@
                             </div>
                         </div>
                         
-                        <!-- Description -->
                         <div data-aos="fade-left" class="w-full lg:w-1/2">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">UTILITY</span>
@@ -210,14 +191,10 @@
                         </div>
                     </div>
         
-                    <!-- PRODUCT 2: LIVEPLAY -->
                     <div class="flex flex-col lg:flex-row-reverse gap-12 items-center">
-                        <!-- Logo Container -->
                         <div data-aos="fade-left" class="w-full lg:w-1/2 glass-card p-12 rounded-2xl relative overflow-hidden group flex items-center justify-center min-h-[300px]">
-                             <!-- Background Glow Effect -->
                              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 blur-[60px] rounded-full group-hover:bg-white/10 transition-colors duration-500"></div>
                             
-                             <!-- TEXT LOGO: Lowercase, Onest Font -->
                             <div class="relative z-10 transition-transform duration-500 group-hover:scale-105">
                                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter font-sans lowercase text-white">
                                     liveplay
@@ -225,7 +202,6 @@
                             </div>
                         </div>
                         
-                        <!-- Description -->
                         <div data-aos="fade-right" class="w-full lg:w-1/2">
                              <div class="flex items-center gap-3 mb-4">
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">PLATFORM</span>
@@ -279,50 +255,6 @@
         </footer>
     </div>
 
-    <!-- COMMUNITY CHAT MODAL (NEW) -->
-    <div id="community-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('community-modal')">
-        <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-4xl h-[80vh] rounded-xl flex flex-col shadow-2xl relative overflow-hidden" onclick="event.stopPropagation()">
-            <!-- Header -->
-            <div class="flex justify-between items-center p-4 md:p-6 border-b border-white/10 bg-black/50 backdrop-blur">
-                <div class="flex items-center gap-3">
-                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <div>
-                        <h2 class="text-xl font-bold text-white">Global Community</h2>
-                        <p class="text-xs text-gray-400 font-mono">Feedback & Bug Reports</p>
-                    </div>
-                </div>
-                <button onclick="closeModal('community-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-
-            <!-- Chat Messages Area -->
-            <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#050505]">
-                <div class="flex justify-center my-4">
-                    <span class="text-xs text-gray-600 font-mono bg-white/5 px-3 py-1 rounded-full">Chat connected to Global Relay</span>
-                </div>
-                <!-- Messages will be injected here via JS -->
-            </div>
-
-            <!-- Input Area -->
-            <div class="p-4 bg-black border-t border-white/10">
-                <div class="flex flex-col gap-3">
-                    <!-- Identity Row -->
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs text-gray-500 font-mono">USER:</span>
-                        <input type="text" id="chat-username" placeholder="Anonymous" class="bg-transparent border-b border-white/20 text-green-500 font-mono text-sm focus:outline-none focus:border-green-500 w-32 px-1">
-                    </div>
-                    <!-- Message Row -->
-                    <div class="flex gap-3">
-                        <input type="text" id="chat-input" placeholder="Type your feedback or report a bug..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" autocomplete="off">
-                        <button id="chat-send-btn" class="bg-white text-black px-6 py-2 rounded-lg font-bold text-sm hover:bg-gray-200 transition-colors">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EXISTING STATUS MODAL -->
     <div id="status-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('status-modal')">
         <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-2xl rounded-xl p-6 md:p-8 shadow-2xl relative overflow-hidden" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-6">
@@ -358,7 +290,6 @@
         </div>
     </div>
 
-    <!-- LEGAL MODALS -->
     <div id="privacy-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('privacy-modal')">
         <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-3xl rounded-xl p-10 shadow-2xl relative overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-6">
@@ -366,7 +297,7 @@
                 <button onclick="closeModal('privacy-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="prose prose-invert text-gray-400 text-sm">
-                <p>All processing is done locally. Chat messages are public.</p>
+                <p>All processing is done locally.</p>
             </div>
         </div>
     </div>
@@ -378,14 +309,12 @@
                 <button onclick="closeModal('terms-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="prose prose-invert text-gray-400 text-sm">
-                <p>Do not abuse the global chat. Spam will result in a ban.</p>
+                <p>Tools are provided "as is" for development purposes.</p>
             </div>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/lib/open.js"></script>
     <script src="/js/script.js"></script>
 </body>
 </html>
