@@ -9,6 +9,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -34,13 +35,13 @@
         }
     </script>
 </head>
-<body class="antialiased" oncontextmenu="return false;">
+<body class="antialiased bg-black text-white" oncontextmenu="return false;">
 
     <div class="grid-bg"></div>
     <div class="relative w-full overflow-hidden">
         <div class="spotlight"></div>
 
-        <nav class="fixed w-full z-50">
+        <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div onclick="window.location.reload()" class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity">
@@ -58,20 +59,20 @@
                     </div>
 
                     <div class="md:hidden">
-                        <button id="menu-btn" class="text-white hover:text-gray-300 focus:outline-none p-2">
-                            <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <button id="menu-btn" onclick="toggleMenu()" class="text-white hover:text-gray-300 focus:outline-none p-2 relative z-50">
+                            <i class="fa-solid fa-bars-staggered text-2xl"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 menu-closed md:hidden flex flex-col items-center py-8 space-y-6 z-40 h-screen">
-                <a href="#home" class="text-xl text-white font-medium" onclick="toggleMenu()">Overview</a>
-                <a href="#features" class="text-xl text-white font-medium" onclick="toggleMenu()">Features</a>
-                <a href="#services" class="text-xl text-white font-medium" onclick="toggleMenu()">Products</a>
-                <a href="https://github.com/projectdevphil" class="text-xl text-white font-medium" onclick="toggleMenu()">GitHub</a>
+            <div id="mobile-menu" class="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-black/95 backdrop-blur-xl border-t border-white/10 menu-closed md:hidden flex flex-col items-center justify-start pt-10 space-y-8 z-40 transition-all duration-300">
+                <a href="#home" class="text-2xl text-white font-medium hover:text-gray-300" onclick="toggleMenu()">Overview</a>
+                <a href="#features" class="text-2xl text-white font-medium hover:text-gray-300" onclick="toggleMenu()">Features</a>
+                <a href="#services" class="text-2xl text-white font-medium hover:text-gray-300" onclick="toggleMenu()">Products</a>
+                <a href="https://github.com/projectdevphil" class="text-2xl text-white font-medium hover:text-gray-300" onclick="toggleMenu()">GitHub</a>
                 <div class="w-20 h-[1px] bg-white/20 my-4"></div>
-                <a href="#contact" class="px-8 py-3 bg-white text-black rounded-full font-bold" onclick="toggleMenu()">Contact Us</a>
+                <a href="#contact" class="px-8 py-4 bg-white text-black rounded-full font-bold text-lg" onclick="toggleMenu()">Contact Us</a>
             </div>
         </nav>
 
