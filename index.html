@@ -8,8 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-  <script>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind Config -->
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -18,19 +20,9 @@
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            black: '#000000',
-                            zinc: '#111111',
-                            border: '#333333'
-                        },
-                        status: {
-                            green: '#22c55e',
-                            yellow: '#eab308',
-                            red: '#ef4444'
-                        }
+                        brand: { black: '#000000', zinc: '#111111', border: '#333333' },
                     },
                     animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'scroll': 'scroll 30s linear infinite',
                     },
                     keyframes: {
@@ -53,7 +45,7 @@
         <nav class="fixed w-full z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
-                    <div onclick="window.location.reload()" class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity" title="Refresh Page">
+                    <div onclick="window.location.reload()" class="flex-shrink-0 flex items-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity">
                         <img class="h-8 w-auto" src="assets/project_dev_logo.svg" onerror="this.src='https://litestream-iptv.vercel.app/assets/project_dev_logo_(white).svg'" alt="ProjectDev Logo">
                     </div>
                     
@@ -63,6 +55,14 @@
                             <a href="#features" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Features</a>
                             <a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Products</a>
                             <a href="https://github.com/projectdevphil" target="_blank" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                            <!-- UPDATED COMMUNITY TAB -->
+                            <button onclick="openModal('community-modal')" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                Community
+                            </button>
                             <a href="#contact" class="bg-white text-black border border-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-transparent hover:text-white transition-all duration-300">Get Started</a>
                         </div>
                     </div>
@@ -75,12 +75,13 @@
                 </div>
             </div>
 
+            <!-- Mobile Menu -->
             <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 menu-closed md:hidden flex flex-col items-center py-8 space-y-6 z-40 h-screen">
                 <a href="#home" class="text-xl text-white font-medium" onclick="toggleMenu()">Overview</a>
                 <a href="#features" class="text-xl text-white font-medium" onclick="toggleMenu()">Features</a>
                 <a href="#services" class="text-xl text-white font-medium" onclick="toggleMenu()">Products</a>
                 <a href="https://github.com/projectdevphil" class="text-xl text-white font-medium" onclick="toggleMenu()">GitHub</a>
-                <a href="#" class="text-xl text-white font-medium" onclick="toggleMenu()">Community</a>
+                <button onclick="toggleMenu(); openModal('community-modal')" class="text-xl text-green-400 font-medium">Community Chat</button>
                 <div class="w-20 h-[1px] bg-white/20 my-4"></div>
                 <a href="#contact" class="px-8 py-3 bg-white text-black rounded-full font-bold" onclick="toggleMenu()">Contact Us</a>
             </div>
@@ -115,6 +116,7 @@
             </div>
         </section>
 
+        <!-- PARTNERS SLIDE -->
         <div class="w-full border-y border-white/5 bg-black py-6 overflow-hidden relative">
             <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10"></div>
             <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10"></div>
@@ -126,7 +128,7 @@
                 <span class="text-xl font-bold font-mono">GOOGLE AI</span>
                 <span class="text-xl font-bold font-mono">GITHUB</span>
                 <span class="text-xl font-bold font-mono">SHAKA PLAYER</span>
-                
+                <!-- Duplicates for loop -->
                 <span class="text-xl font-bold font-mono">NETFLIX</span>
                 <span class="text-xl font-bold font-mono">FAST.COM</span>
                 <span class="text-xl font-bold font-mono">VERCEL</span>
@@ -134,7 +136,6 @@
                 <span class="text-xl font-bold font-mono">GOOGLE AI</span>
                 <span class="text-xl font-bold font-mono">GITHUB</span>
                 <span class="text-xl font-bold font-mono">SHAKA PLAYER</span>
-                
                 <span class="text-xl font-bold font-mono">NETFLIX</span>
                 <span class="text-xl font-bold font-mono">FAST.COM</span>
                 <span class="text-xl font-bold font-mono">VERCEL</span>
@@ -192,7 +193,7 @@
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">UTILITY</span>
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">V1.4</span>
                             </div>
-                            <h3 class="text-4xl font-bold mb-4">stream tester</h3>
+                            <h3 class="text-4xl font-bold mb-4">Stream Tester</h3>
                             <p class="text-gray-400 text-lg mb-6 leading-relaxed">The ultimate diagnostic tool for HLS & DASH streams. Detect manifest errors, CORS issues, and bitrate ladders in real-time.</p>
                             <a href="https://projectdevphil.github.io/stream-tester/" target="_blank" class="text-white border-b border-white pb-1 hover:text-gray-300 transition-colors">Launch Application</a>
                         </div>
@@ -208,7 +209,7 @@
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">PLATFORM</span>
                                 <span class="px-3 py-1 text-xs font-mono border border-white/20 rounded-full text-gray-300">WEB APP</span>
                             </div>
-                            <h3 class="text-4xl font-bold mb-4">liveplay</h3>
+                            <h3 class="text-4xl font-bold mb-4">Liveplay</h3>
                             <p class="text-gray-400 text-lg mb-6 leading-relaxed">A modern, lightweight IPTV player that runs entirely in the browser. No installation required—just pure, high-quality streaming.</p>
                             <a href="https://liveplay.vercel.app/home" target="_blank" class="text-white border-b border-white pb-1 hover:text-gray-300 transition-colors">Open Platform</a>
                         </div>
@@ -237,7 +238,7 @@
                         <a href="https://github.com/projectdevphil" target="_blank" class="text-gray-500 hover:text-white transition-colors">
                             <i class="fa-brands fa-github text-xl"></i>
                         </a>
-                        <a href="#" target="_blank" class="text-gray-500 hover:text-white transition-colors opacity-60 hover:opacity-100">
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors opacity-60 hover:opacity-100">
                            <i class="fa-solid fa-users text-xl"></i>
                         </a>
                     </div>
@@ -256,6 +257,50 @@
         </footer>
     </div>
 
+    <!-- COMMUNITY CHAT MODAL (NEW) -->
+    <div id="community-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('community-modal')">
+        <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-4xl h-[80vh] rounded-xl flex flex-col shadow-2xl relative overflow-hidden" onclick="event.stopPropagation()">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 md:p-6 border-b border-white/10 bg-black/50 backdrop-blur">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Global Community</h2>
+                        <p class="text-xs text-gray-400 font-mono">Feedback & Bug Reports</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('community-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <!-- Chat Messages Area -->
+            <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#050505]">
+                <div class="flex justify-center my-4">
+                    <span class="text-xs text-gray-600 font-mono bg-white/5 px-3 py-1 rounded-full">Chat connected to Global Relay</span>
+                </div>
+                <!-- Messages will be injected here via JS -->
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 bg-black border-t border-white/10">
+                <div class="flex flex-col gap-3">
+                    <!-- Identity Row -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-500 font-mono">USER:</span>
+                        <input type="text" id="chat-username" placeholder="Anonymous" class="bg-transparent border-b border-white/20 text-green-500 font-mono text-sm focus:outline-none focus:border-green-500 w-32 px-1">
+                    </div>
+                    <!-- Message Row -->
+                    <div class="flex gap-3">
+                        <input type="text" id="chat-input" placeholder="Type your feedback or report a bug..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" autocomplete="off">
+                        <button id="chat-send-btn" class="bg-white text-black px-6 py-2 rounded-lg font-bold text-sm hover:bg-gray-200 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXISTING STATUS MODAL -->
     <div id="status-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('status-modal')">
         <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-2xl rounded-xl p-6 md:p-8 shadow-2xl relative overflow-hidden" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-6">
@@ -288,12 +333,10 @@
                     <span id="status-core" class="text-gray-500 flex items-center gap-2">Checking...</span>
                 </div>
             </div>
-            <div class="mt-4 text-right text-[10px] text-gray-600 font-mono">
-                Hosted on Vercel Edge Network
-            </div>
         </div>
     </div>
 
+    <!-- LEGAL MODALS -->
     <div id="privacy-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4" onclick="closeModal('privacy-modal')">
         <div class="modal-content bg-[#0A0A0A] border border-white/10 w-full max-w-3xl rounded-xl p-10 shadow-2xl relative overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-6">
@@ -301,8 +344,7 @@
                 <button onclick="closeModal('privacy-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="prose prose-invert text-gray-400 text-sm">
-                <p class="mb-4">Last Updated: 2025</p>
-                <p>Project Dev operates as a privacy-first entity. We do not store, log, or track your personal viewing habits or stream URLs on our servers. All processing is done locally.</p>
+                <p>All processing is done locally. Chat messages are public.</p>
             </div>
         </div>
     </div>
@@ -314,12 +356,14 @@
                 <button onclick="closeModal('terms-modal')" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="prose prose-invert text-gray-400 text-sm">
-                <p>By accessing Project Dev's tools, you agree to these terms. Tools are provided "as is" for development purposes. We are not responsible for content streamed via Litestream.</p>
+                <p>Do not abuse the global chat. Spam will result in a ban.</p>
             </div>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/open.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
