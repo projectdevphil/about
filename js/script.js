@@ -1,50 +1,46 @@
-// Initialize AOS Animation
-document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({ duration: 800, once: true, offset: 100 });
-    initGunChat(); // Start Chat System
-});
-
-// --- MENU & MODAL LOGIC ---
-const menuBtn = document.getElementById('menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-
-// Toggle Mobile Menu
+// 1. DEFINE MENU FUNCTIONS FIRST (Critical for UI)
 window.toggleMenu = function() {
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
     if (!menuBtn || !mobileMenu) return;
+    
     const icon = menuBtn.querySelector('i');
     const isClosed = mobileMenu.classList.contains('menu-closed');
     
     if (isClosed) {
         mobileMenu.classList.remove('menu-closed');
         mobileMenu.classList.add('menu-open');
-        icon.classList.remove('fa-bars-staggered');
-        icon.classList.add('fa-xmark');
+        if(icon) {
+            icon.classList.remove('fa-bars-staggered');
+            icon.classList.add('fa-xmark');
+        }
         document.body.style.overflow = 'hidden';
     } else {
         mobileMenu.classList.remove('menu-open');
         mobileMenu.classList.add('menu-closed');
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars-staggered');
+        if(icon) {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars-staggered');
+        }
         document.body.style.overflow = '';
     }
-}
+};
 
-if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
-
-// Open/Close Modals
 window.openModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if(modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Trigger specific logic
         if(modalId === 'status-modal') runStatusSimulation();
-        // Auto scroll chat
         if(modalId === 'community-modal') {
              const box = document.getElementById('chat-box');
-             setTimeout(() => box.scrollTop = box.scrollHeight, 100);
+             if(box) setTimeout(() => box.scrollTop = box.scrollHeight, 100);
         }
     }
-}
+};
 
 window.closeModal = function(modalId) {
     const modal = document.getElementById(modalId);
@@ -52,16 +48,37 @@ window.closeModal = function(modalId) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-}
+};
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+// 2. INITIALIZATION
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS safely
+    try {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({ duration: 800, once: true, offset: 100 });
+        }
+    } catch (e) { console.warn('AOS Animation failed:', e); }
+
+    // Initialize Chat safely
+    try {
+        if (typeof Gun !== 'undefined') {
+            initGunChat();
+        } else {
+            console.error('Gun.js not loaded. Chat will not work.');
+            const chatBox = document.getElementById('chat-box');
+            if(chatBox) chatBox.innerHTML = '<div class="text-red-500 p-4 text-center">Chat System Unavailable (Library Missing)</div>';
+        }
+    } catch (e) { console.error('Chat Init failed:', e); }
+    
+    // Add Esc key listener
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    });
 });
 
-// --- GUN.JS REAL-TIME CHAT (NO FIREBASE) ---
+
+// 3. GUN.JS CHAT LOGIC
 function initGunChat() {
-    // 1. Connect to Public Relay Nodes (Peers)
-    // These are free community servers that relay messages
     const gun = Gun([
         'https://gun-manhattan.herokuapp.com/gun',
         'https://gun-eu.herokuapp.com/gun',
@@ -69,55 +86,43 @@ function initGunChat() {
     ]);
 
     const chatNode = gun.get('project-dev-global-chat-v1');
-    const chatBox = document.getElementById('chat-box');
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send-btn');
     const usernameInput = document.getElementById('chat-username');
+
+    if (!chatInput || !sendBtn) return; // Exit if chat elements don't exist
 
     // Load saved username
     if(localStorage.getItem('chat_username')) {
         usernameInput.value = localStorage.getItem('chat_username');
     }
 
-    // 2. Send Message Function
     const sendMessage = () => {
         const text = chatInput.value.trim();
         const user = usernameInput.value.trim() || 'Anonymous';
 
         if (text) {
             localStorage.setItem('chat_username', user);
-            
-            // Save to Decentralized DB
             const timestamp = Date.now();
-            chatNode.set({
-                user: user,
-                text: text,
-                time: timestamp
-            });
-
+            chatNode.set({ user: user, text: text, time: timestamp });
             chatInput.value = '';
         }
     };
 
-    // Listeners
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
     });
 
-    // 3. Receive Messages (Real-time Sync)
-    // .map() iterates over all data, .once() gets it, .on() listens for updates
-    // We use a Set to prevent duplicates which can happen in P2P
+    // Receive Messages
     const displayedMessageIds = new Set();
-
-    // Limit to recent messages (Gun doesn't have easy query limits, so we filter visually)
+    
     chatNode.map().on((data, id) => {
         if (!data || !data.text || !data.time) return;
         if (displayedMessageIds.has(id)) return;
         
-        // Filter: Only show messages from the last 24 hours to keep DOM clean
-        const oneDay = 24 * 60 * 60 * 1000;
-        if (Date.now() - data.time > oneDay) return;
+        // Filter: Last 24 hours only
+        if (Date.now() - data.time > 86400000) return;
 
         displayedMessageIds.add(id);
         renderMessage(data.user, data.text, data.time);
@@ -126,58 +131,56 @@ function initGunChat() {
 
 function renderMessage(user, text, time) {
     const chatBox = document.getElementById('chat-box');
+    if(!chatBox) return;
+
     const myName = document.getElementById('chat-username').value || 'Anonymous';
     const isMe = user === myName || user === localStorage.getItem('chat_username');
 
     const div = document.createElement('div');
     div.className = `message-bubble ${isMe ? 'message-mine' : 'message-other'} fade-in`;
     
-    // Security: Sanitize HTML
     const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const safeUser = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     
-    // Format Time
     const date = new Date(time);
     const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    div.innerHTML = `
-        <span class="message-meta">${safeUser} • ${timeStr}</span>
-        ${safeText}
-    `;
+    div.innerHTML = `<span class="message-meta">${safeUser} • ${timeStr}</span>${safeText}`;
 
-    // Append and Scroll
     chatBox.appendChild(div);
-    
-    // Keep auto-scrolling unless user scrolled up
     if(chatBox.scrollHeight - chatBox.scrollTop < 600) {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
 
-// --- STATUS SIMULATION ---
+// 4. STATUS SIMULATION
 function runStatusSimulation() {
     const indicator = document.getElementById('status-indicator');
+    if(!indicator) return;
+    
     const els = ['status-liveplay', 'status-tester', 'status-core'].map(id => document.getElementById(id));
 
-    // Reset
     indicator.innerHTML = `
         <div class="h-12 w-12 rounded-full bg-gray-700 flex items-center justify-center text-white text-xl animate-spin"><i class="fa-solid fa-circle-notch"></i></div>
         <div><h3 class="text-white font-bold text-lg">Checking Connectivity...</h3><p class="text-gray-400 text-sm font-mono">Pinging Vercel Edge Nodes...</p></div>`;
     indicator.className = "bg-gray-800/20 border border-gray-700 rounded-lg p-6 mb-8 flex items-center gap-4 transition-all duration-500";
 
     els.forEach(el => {
-        el.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> Pinging...`;
-        el.className = "text-yellow-500 flex items-center gap-2 font-mono text-xs";
+        if(el) {
+            el.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> Pinging...`;
+            el.className = "text-yellow-500 flex items-center gap-2 font-mono text-xs";
+        }
     });
 
-    // Animate Success
     setTimeout(() => {
         const pings = ['24ms', '31ms', '18ms'];
         els.forEach((el, i) => {
-            setTimeout(() => {
-                el.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span> ${pings[i]}`;
-                el.className = "text-green-500 flex items-center gap-2 font-mono text-xs";
-            }, i * 300);
+            if(el) {
+                setTimeout(() => {
+                    el.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span> ${pings[i]}`;
+                    el.className = "text-green-500 flex items-center gap-2 font-mono text-xs";
+                }, i * 300);
+            }
         });
 
         setTimeout(() => {
